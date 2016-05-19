@@ -23,8 +23,20 @@
 
 ;; Customizations for shell script mode
 
+(defun new-shell-script ()
+    "Boilerplate for new shell script"
+  (interactive)
+  (let (; save current point
+        (start-point (point)))
+    (insert "#!/bin/bash\n\n")
+    (insert "function usage\n{\n/bin/echo \"usage $0: \"\nexit 1\n}\n")
+    (indent-and-restore start-point (point-max))
+    ))
+
 (add-hook 'sh-mode-hook
 	  '(lambda ()
+	     (setq show-trailing-whitespace t)
+	     (define-key sh-mode-map "\C-cp" 'new-shell-script)
 	     ;; Default mapping for "C-c C-c" has something to do with
 	     ;; case statements.
 	     (define-key sh-mode-map "\C-c\C-c" 'comment-region)

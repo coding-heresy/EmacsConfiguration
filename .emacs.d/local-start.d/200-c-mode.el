@@ -47,7 +47,11 @@
 ;; Hooks
 (add-hook 'c-mode-hook
 	  '(lambda ()
+	     (setq show-trailing-whitespace t)
 	     (flyspell-prog-mode)
 	     (flymake-mode)
 	     (define-key c-mode-map "\C-cp" 'c-new-main-program)
-	     ))
+             (define-key c-mode-map "\C-c\C-[" 'comment-out-code)
+             (define-key c-mode-map "\C-c\C-]" 'uncomment-out-code)
+             (define-key c-mode-map "\C-c\C-r" 'save-and-replace-code)
+ 	     ))

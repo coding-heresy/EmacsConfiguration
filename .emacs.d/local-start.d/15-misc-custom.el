@@ -51,6 +51,36 @@
   (interactive)
   (revert-buffer t (not (buffer-modified-p)) t))
 
+(defun comment-out-code (beg end &optional arg)
+  "Comment out a region of code"
+  (interactive "*r\nP")
+  (let ((old-comment-start comment-start))
+    (setq comment-start (concat comment-start "@todo: OLD CODE"))
+    (comment-region beg end arg)
+    (setq comment-start old-comment-start)))
+
+(defun uncomment-out-code (beg end &optional arg)
+  "Uncomment out a region of code"
+  (interactive "*r\nP")
+  (let ((old-comment-start comment-start))
+    (setq comment-start (concat comment-start "@todo: OLD CODE"))
+    (uncomment-region beg end arg)
+    (setq comment-start old-comment-start)))
+
+(defun save-and-replace-code (beg end &optional arg)
+  "comment out a region of code to save it, then paste a copy of it for modification"
+  (interactive "*r\nP")
+  (copy-region-as-kill beg end)
+  (let ((old-end end))
+    (goto-char (- end 1))
+    (comment-out-code beg old-end))
+  (forward-line)
+  (let ((new-beg (point))
+        (new-end (+ (point) (- end beg))))
+    (yank)
+    (indent-and-restore new-beg new-end)))
+
+
 
 ;; Functions used in more than one other mode
 

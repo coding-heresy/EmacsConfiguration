@@ -59,7 +59,7 @@
     (insert-c++-copyright)
     (insert-c++-include-file-sections)
     (insert "using namespace std;\n\n")
-    (insert "int\nmain(int argc,\nconst char *argv[])\n{\n}\n")
+    (insert "int\nmain(const int argc,\nconst char *argv[])\n{\n}\n")
     (indent-and-restore start-point (point))
     ))
 
@@ -72,10 +72,14 @@
 ;; Hooks
 (add-hook 'c++-mode-hook
 	  '(lambda ()
+	     (setq show-trailing-whitespace t)
 	     (flyspell-prog-mode)
-	     (flymake-mode)
-	     (define-key c++-mode-map "\C-cp"
-	       'c++-new-main-program)
-	     (define-key c++-mode-map "\C-cT"
-	       'c++-new-test-program-skeleton)
+	     ;; (flymake-mode)
+	     ;; (flycheck-mode)
+	     (define-key c++-mode-map "\C-cp" 'c++-new-main-program)
+	     (define-key c++-mode-map "\C-cT" 'c++-new-test-program-skeleton)
+             (define-key c++-mode-map "\C-c\C-[" 'comment-out-code)
+             (define-key c++-mode-map "\C-c\C-]" 'uncomment-out-code)
+             (define-key c++-mode-map "\C-c\C-r" 'save-and-replace-code)
+             (font-lock-add-keywords nil '(("//.+OLD CODE.+$" 1 font-lock-code-comment-face t)))
 	     ))

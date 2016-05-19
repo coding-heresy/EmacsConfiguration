@@ -24,3 +24,9 @@
 ;; Customization of makefile mode
 (add-to-list 'auto-mode-alist '("/Makefile[^/]*$" . makefile-mode))
 (add-to-list 'auto-mode-alist '("\.make$" . makefile-mode))
+
+;; Show trailing whitespace
+(add-hook 'makefile-mode-hook
+	  '(lambda()
+	     (setq show-trailing-whitespace t)
+	     ))
