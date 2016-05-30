@@ -23,6 +23,6 @@
 
 (if *has-graphviz-dot-mode*
     (progn
-      (load "graphviz-dot-mode.el")
+      (autoload 'graphviz-dot-mode (concat base-emacs-plugin-dir "/graphviz-dot-mode.el"))
       (add-to-list 'auto-mode-alist '("\\.dot$" . graphviz-dot-mode))
       ))
