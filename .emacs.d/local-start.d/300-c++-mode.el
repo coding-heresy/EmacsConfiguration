@@ -67,6 +67,8 @@
 ;; Use C++ mode for Arduino sketches
 (add-to-list 'auto-mode-alist '("\\.pde$" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.ino$" . c++-mode))
+;; Use C++ mode for openscad
+(add-to-list 'auto-mode-alist '("\\.scad$" . c++-mode))
 
 
 ;; Hooks
