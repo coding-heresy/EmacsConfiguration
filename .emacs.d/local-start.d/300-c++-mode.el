@@ -32,16 +32,18 @@
   (insert "// Other library includes\n\n")
   (insert "// local includes\n\n"))
 
-(defun insert-c++-copyright ()
-  (insert "// " copyright-str "\n\n"))
-
 (defun c++-new-test-program-skeleton ()
   "Boilerplate for new test program using the Catch framework."
   (interactive)
   (let (; save current point
 	(start-point (point)))
-    (insert-c++-copyright)
-    (insert-include-file-sections)
+    (insert-emacs-mode "/*" "c++")
+    (insert " *\n * <file name>\n *\n * <description>\n *\n")
+    (insert-source-code-copyright " *")
+    (insert-license-body " *")
+    (insert-author-info " *")
+    (insert " *\n */\n\n")
+    (insert-c++-include-file-sections)
     (insert "\n#define CATCH_CONFIG_MAIN\n")
     (insert "#include <Catch/catch.hpp>\n\n")
     (insert "using namespace std;\n\n")
@@ -56,7 +58,12 @@
   (interactive)
   (let (; save current point
 	(start-point (point)))
-    (insert-c++-copyright)
+    (insert-emacs-mode "/*" "c++")
+    (insert " *\n * <file name>\n *\n * <description>\n *\n")
+    (insert-source-code-copyright "*")
+    (insert-license-body " *")
+    (insert-author-info " *")
+    (insert " *\n */\n\n")
     (insert-c++-include-file-sections)
     (insert "using namespace std;\n\n")
     (insert "int\nmain(const int argc,\nconst char *argv[])\n{\n}\n")

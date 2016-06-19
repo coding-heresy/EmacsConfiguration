@@ -29,3 +29,11 @@
 (defun calc-micro (bp bs ap as)
   "Calculate micro price."
   (+ bp (* (- ap bp) (/ bs (+ bs as)))))
+
+;; Code for calculating the center of a hole with a given inside
+;; diameter and outsied diameter.
+(defun calc-center-of (inside-diameter outside-diameter)
+  (let* ((is-reversed (> inside-diameter outside-diameter))
+	 (id (if is-reversed outside-diameter inside-diameter))
+	 (od (if is-reversed inside-diameter outside-diameter)))
+    (+ id (/ (- od id) 2.0))))

@@ -29,16 +29,18 @@
   (insert "/* System includes */\n\n")
   (insert "/* local includes */\n\n"))
 
-(defun insert-c-copyright ()
-  (insert "/* " copyright-str " */\n\n"))
-
 ;; Interactive functions.
 (defun c-new-main-program ()
   "Boilerplate for new main program."
   (interactive)
   (let (;; save current point for later use in indentation
 	(start-point (point)))
-    (insert-c-copyright)
+    (insert-emacs-mode "/*" "c")
+    (insert " *\n * <file name>\n *\n * <description>\n *\n")
+    (insert-source-code-copyright "*")
+    (insert-license-body " *")
+    (insert-author-info " *")
+    (insert " *\n */\n\n")
     (insert-c-include-files-sections)
     (insert "int\nmain(int argc,\nconst char *argv[])\n{\n}\n")
     (indent-and-restore start-point (point))))
