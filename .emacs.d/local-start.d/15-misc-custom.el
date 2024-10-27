@@ -55,7 +55,7 @@
   "Comment out a region of code"
   (interactive "*r\nP")
   (let ((old-comment-start comment-start))
-    (setq comment-start (concat comment-start "@todo: OLD CODE"))
+    (setq comment-start (concat comment-start "TODO: OLD CODE"))
     (comment-region beg end arg)
     (setq comment-start old-comment-start)))
 
@@ -63,7 +63,7 @@
   "Uncomment out a region of code"
   (interactive "*r\nP")
   (let ((old-comment-start comment-start))
-    (setq comment-start (concat comment-start "@todo: OLD CODE"))
+    (setq comment-start (concat comment-start "TODO: OLD CODE"))
     (uncomment-region beg end arg)
     (setq comment-start old-comment-start)))
 

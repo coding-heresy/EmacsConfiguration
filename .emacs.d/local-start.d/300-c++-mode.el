@@ -91,4 +91,5 @@
              (define-key c++-mode-map "\C-c\C-]" 'uncomment-out-code)
              (define-key c++-mode-map "\C-c\C-r" 'save-and-replace-code)
              (font-lock-add-keywords nil '(("//.+OLD CODE.+$" 1 font-lock-code-comment-face t)))
+	     (c-set-offset 'innamespace '0)
 	     ))

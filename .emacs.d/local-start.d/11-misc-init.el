@@ -23,27 +23,32 @@
 
 ;; Initialization code that does not seem to go anywhere else.
 
-;; Use Common Lisp package.
-(require 'cl)
-
 ;; New default compile command.
-(setq compile-command "make ")
-
-;; Emacs Speaks Statistics
-;;(require 'ess-site)
+(setq compile-command "bazel build -c dbg ...")
 
 ;; Enable upcase-region command.
 (put 'upcase-region 'disabled nil)
-
-(if *has-cedet*
-    ;; Configure CEDET
-    (progn
-      (semantic-mode 1)
-      (global-ede-mode 1)
-      (global-srecode-minor-mode 1)
-      ))
 
 (if *has-flymake-cursor*
     ;; Use flymake-cursor
     (load "flymake-cursor.el")
   )
+
+;; Use packages from melpa-stable
+(require 'package)
+(add-to-list 'package-archives
+	     '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+
+;; Configuration for bazel
+(require 'bazel)
+(add-to-list 'auto-mode-alist '("^BUILD$" . bazel-mode))
+(add-to-list 'auto-mode-alist '("^BUILD.bazel$" . bazel-mode))
+(add-to-list 'auto-mode-alist '("^MODULE$" . bazel-mode))
+(add-to-list 'auto-mode-alist '("^MODULE.bazel$" . bazel-mode))
+(add-to-list 'auto-mode-alist '("^\\.bazelrc$" . bazel-mode))
+(add-to-list 'auto-mode-alist '("\\.bzl$" . bazel-mode))
+
+;; Don't jump to bazel-specific errors in the *compilation* window
+(require 'compile)
+(add-to-list 'compilation-transform-file-match-alist '("BUILD.bazel" nil))
+(add-to-list 'compilation-transform-file-match-alist '("BUILD" nil))

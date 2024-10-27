@@ -66,6 +66,9 @@
 ;; Enable narrow-to-region command
 (put 'narrow-to-region 'disabled nil)
 
+;; Never, ... ever, ... ever, ever, ever, ever, ever use tabs. OK?
+(setq-default indent-tabs-mode nil)
+
 
 ;; Visuals.
 
@@ -77,8 +80,7 @@
 (set-face-foreground 'font-lock-variable-name-face "Purple")
 
 ;; Correct font on startup.
-(set-default-font
- "-Misc-Fixed-Medium-R-Normal--10-100-75-75-C-60-ISO8859-1")
+(set-frame-font "DejaVu Sans Mono-9" nil t)
 
 ;; White background is very hard on the eyes.
 (set-background-color "LightGray")
